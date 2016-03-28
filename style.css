@@ -1,0 +1,43 @@
+body {background-color:#000000;background-image:url('noisygrad.png');background-repeat:repeat-x;
+color:#0066CC;font-size:100%;font-family:"Verdana", Sans-serif;}
+a:link {color:#269900;text-decoration:none;}   
+a:visited {color:#739900;text-decoration:none;}  
+a:hover {color:#990026;text-decoration:underline;} 
+a:link.post {color:#003CF0;text-decoration:none;}   
+a:visited.post {color:#2D00B3;text-decoration:none;}  
+a:hover.post {color:#269900;text-decoration:underline;} 
+div.textsection {
+  border-style:solid;
+  border-width:1px;
+  border-color:#007399;
+  margin:10px;
+  padding:15px;
+}
+div.sociallinks {
+  width:100px;
+  height:20px;
+  /*border-style:solid;
+  border-width:1px;
+  border-color:#007399;*/ 
+  float:right;
+  margin:0px;
+  padding:1px;
+  margin-left:auto;
+  margin-right:0px; 
+}
+div.center{
+ width:50%;
+ margin-left:auto;
+ margin-right:auto; 
+}
+
+/*
+#2D00B3 - purplish blue
+#003CF0 - darker blue
+#007399 - aqua
+#0066CC - lighter blue
+#269900 - green
+#990026 - red
+#990073 - magenta
+#739900 - olive
+*/
