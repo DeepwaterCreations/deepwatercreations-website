@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app>
+<html lang="en" ng-app="deepwaterApp">
     <head>
         <title>Deepwater Creations</title>
         <meta charset="utf-8">
@@ -11,8 +11,17 @@
 
         <!-- EXTERNAL SCRIPTS-->
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+
+        <!-- CONTROLLERS -->
+        <script>
+            var deepwaterApp = angular.module('deepwaterApp', []);
+        </script>
+        <script src="blogCtrl.js"></script>
     </head>
     <body>
-        <div class="textsection">Does Angular work? {{'Yeah!' + ' Sure looks like it does!'}}</div>
+        <div class="logo"><img src="DClogo2013blueneon-medrez.png"></div>
+        <div class="textsection" data-ng-controller="BlogCtrl">
+            {{test}}
+        </div>
     </body>
 </html>
