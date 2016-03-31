@@ -1,3 +1,3 @@
 deepwaterApp.controller('BlogCtrl', function($scope){
-    $scope.test = "This is a blog post. No, really!";
+    $scope.blogposts = ["Fake Blog Post 1", "Fake Blog Post 2"];
 });
