@@ -11,24 +11,20 @@
 
         <!-- EXTERNAL SCRIPTS-->
         <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script> -->
+        <!-- <script src="externals/angular-route.min.js"></script> -->
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.js"></script>
+        <script src="externals/angular-route.js"></script>
 
         <!-- CONTROLLERS -->
         <script>
-            var deepwaterApp = angular.module('deepwaterApp', []);
+            var deepwaterControllers = angular.module('deepwaterControllers', []);
         </script>
-        <script src="blogCtrl.js"></script>
+        <script src="app.js"></script>
+        <script src="blog/blogCtrl.js"></script>
+
     </head>
     <body>
         <div class="logo"><img src="DClogo2013blueneon-medrez.png"></div>
-        <div data-ng-controller="BlogCtrl">
-            <div class="textsection" data-ng-repeat="post in blogposts">
-                Title: {{post.title}}<br>
-                Date: {{post.date}}<br>
-                Author: {{post.author}}<br>
-                <br>
-                {{post.entry}}<br>
-            </div>
-        </div>
+        <div data-ng-view></div>
     </body>
 </html>
