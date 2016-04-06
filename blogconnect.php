@@ -25,7 +25,7 @@ try{
 try{
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $pdo->beginTransaction();
-    $result = $pdo->query("SELECT * FROM blog");
+    $result = $pdo->query("SELECT * FROM blog ORDER BY id DESC");
     $pdo->commit();
     echo json_encode($result->fetchAll());
 } catch(Exception $fit){
