@@ -14,4 +14,15 @@ deepwaterControllers.controller('BlogCtrl', function($scope, $http){
         var firstpagepost = $scope.current_page * posts_per_page;
         return blogposts.slice(firstpagepost, firstpagepost + posts_per_page);
     };
+
+    //Changes the page
+    //Higher page number means older posts.
+    $scope.nextPage = function(){
+        $scope.current_page++;   
+    };
+    $scope.prevPage = function(){
+        $scope.current_page--;    
+        if($scope.current_page < 0)
+            $scope.current_page = 0;
+    };
 });
