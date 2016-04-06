@@ -1,5 +1,5 @@
 <div data-ng-controller="BlogCtrl">
-    <div class="textsection" data-ng-repeat="post in blogposts">
+    <div class="textsection" data-ng-repeat="post in getPagePosts()">
         Title: {{post.title}}<br>
         Date: {{post.date}}<br>
         Author: {{post.author}}<br>
