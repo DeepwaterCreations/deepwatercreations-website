@@ -1,5 +1,6 @@
 var deepwaterApp = angular.module('deepwaterApp', [
         'ngRoute',
+        'ngSanitize',
         'deepwaterControllers'
 ]);
 
