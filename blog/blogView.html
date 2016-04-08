@@ -2,10 +2,9 @@
     <button data-ng-click="nextPage()" data-ng-show="!isOldestPage()">Older Posts</button>
     <button data-ng-click="prevPage()" data-ng-show="!isNewestPage()">Newer Posts</button>
     <div class="textsection" data-ng-repeat="post in getPagePosts()">
-        Title: {{post.title}}<br>
-        Date: {{post.date}}<br>
-        Author: {{post.author}}<br>
-        <br>
-        {{post.entry}}<br>
+        <h3><a class="post" href="">{{post.title}}</a></h3>
+        <p>{{post.author}} - {{post.date}}</p>
+        <br />
+        <div data-ng-bind-html="post.entry"></div>
     </div>
 </div>
