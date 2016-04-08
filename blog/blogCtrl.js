@@ -25,4 +25,15 @@ deepwaterControllers.controller('BlogCtrl', function($scope, $http){
         if($scope.current_page < 0)
             $scope.current_page = 0;
     };
+
+    //Check if we're on the first or last page.
+    $scope.isNewestPage = function(){
+        return $scope.current_page <= 0;
+    }
+    $scope.isOldestPage = function(){
+        console.log(blogposts.length);
+        var oldestpage = Math.floor(blogposts.length / posts_per_page);
+        console.log(" Oldest page: ", oldestpage);
+        return $scope.current_page >= oldestpage;
+    }
 });

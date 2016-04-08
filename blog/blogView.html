@@ -1,7 +1,6 @@
 <div data-ng-controller="BlogCtrl">
-    <!-- <span data-ng-click="nextPage()">Older Posts</span>|<span data-ng-click="prevPage()">Newer Posts</span> -->
-    <button data-ng-click="nextPage()">Older Posts</button>
-    <button data-ng-click="prevPage()">Newer Posts</button>
+    <button data-ng-click="nextPage()" data-ng-show="!isOldestPage()">Older Posts</button>
+    <button data-ng-click="prevPage()" data-ng-show="!isNewestPage()">Newer Posts</button>
     <div class="textsection" data-ng-repeat="post in getPagePosts()">
         Title: {{post.title}}<br>
         Date: {{post.date}}<br>
