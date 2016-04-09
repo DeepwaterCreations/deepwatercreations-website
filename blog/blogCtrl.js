@@ -3,7 +3,11 @@ deepwaterControllers.controller('BlogCtrl', function($scope, $http){
     //queries the database.
     var blogposts = [];
     $http.get('blogconnect.php').success(function(data){
-        blogposts = data;
+        //Run the data through the post parser to interpret 
+        //any hand-rolled markup I might be using.
+        data.forEach(function(post){
+            blogposts.push(PostParser.parse(post));
+        });
     });
 
     $scope.current_page = 0; 
@@ -31,9 +35,7 @@ deepwaterControllers.controller('BlogCtrl', function($scope, $http){
         return $scope.current_page <= 0;
     }
     $scope.isOldestPage = function(){
-        console.log(blogposts.length);
         var oldestpage = Math.floor(blogposts.length / posts_per_page);
-        console.log(" Oldest page: ", oldestpage);
         return $scope.current_page >= oldestpage;
     }
 });
