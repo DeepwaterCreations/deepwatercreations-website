@@ -19,9 +19,9 @@ var PostParser = function(){
             },
             full_view: "<b>"
         },
-        "</cut>": {
-            blog_view: "</a>",
-            full_view: "</b>"
+        "</cut>(?:(.|[\r\n])*)": { //Matches the closing tag and everything after it.
+            blog_view: "</a>", //On the blog view, we throw away all the text after the closing cut tag.
+            full_view: "</b>$1" //On the full view, we put it back in. $1 is matching group 1 of the search text.
         }
     };
 
@@ -46,8 +46,8 @@ var PostParser = function(){
 
         for(searchval in replace_dict){
             if(replace_dict.hasOwnProperty(searchval)){
-                var replaceval = replace_dict[searchval][viewtype];
                 var globalsearchval = new  RegExp(searchval, 'g'); //Or else we'll only replace the first match.
+                var replaceval = replace_dict[searchval][viewtype];
                 parsedpost = parsedpost.replace(globalsearchval, replaceval);
             }
         }
