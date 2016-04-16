@@ -22,10 +22,19 @@ try{
 }
 
 /* Get blog data and output it as json */
+/* If we have an ID, just get that one post. Otherwise, get all posts. */
+$query = "SELECT * FROM blog";
+$id = $_GET['ID'];
+if(ctype_digit($id) && $id > -1){
+    $query = $query . " WHERE id = $id";
+}else{
+    $query = $query . " ORDER BY id DESC";
+}
+
 try{
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $pdo->beginTransaction();
-    $result = $pdo->query("SELECT * FROM blog ORDER BY id DESC");
+    $result = $pdo->query($query);
     $pdo->commit();
     echo json_encode($result->fetchAll());
 } catch(Exception $fit){
