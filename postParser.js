@@ -15,7 +15,7 @@ var PostParser = function(){
     var replace_dict = {
         "<cut>": {
             blog_view: function(){
-                return "<a href='" + /*??? + current_id +*/ "'>";
+                return "<a href='#/blog/" + current_id + "'>";
             },
             full_view: "<b>"
         },
