@@ -11,6 +11,10 @@ deepwaterApp.config(['$routeProvider',
             templateUrl: 'blog/blogView.html',
             controller: 'BlogCtrl'
         }).
+        when('/blog/:ID',{
+            templateUrl: 'blog/blogPageView.html',
+            controller: 'BlogPageCtrl'
+        }).
         otherwise({
             redirectTo: '/blog'
         });
