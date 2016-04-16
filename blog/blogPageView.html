@@ -1,6 +1,15 @@
-<div data-ng-controller="BlogPageCtrl" class="textsection">
-    <h3>{{post.title}}</h3>
-    <p>{{post.author}} - {{post.date}}</p>
-    <br />
-    <div data-ng-bind-html="post.entry"></div>
+<div data-ng-controller="BlogPageCtrl">
+    <div class="textsection">
+        <h3>{{post.title}}</h3>
+        <p>{{post.author}} - {{post.date}}</p>
+        <br />
+        <div data-ng-bind-html="post.entry"></div>
+        <br />
+        <br />
+        <p>---</p>
+        <div>
+            <span>Keywords:</span>
+            <span data-ng-repeat="keyword in post.keywords track by $index"> <i>{{keyword}}</i></span>
+        </div>
+    </div>
 </div>

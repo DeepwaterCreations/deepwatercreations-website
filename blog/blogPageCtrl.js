@@ -3,5 +3,6 @@ deepwaterControllers.controller('BlogPageCtrl', function($scope, $routeParams, $
     $http.get('blogconnect.php', {params: {ID: $routeParams.ID}}).
         then(function(data){
             $scope.post = data.data[0];          
+            $scope.post.keywords = $scope.post.keywords.split(',');
         });
 });
