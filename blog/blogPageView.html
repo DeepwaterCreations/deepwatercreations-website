@@ -13,6 +13,17 @@
         </div>
     </div>
     <h4>Comments:</h4>
+    <div class="textsection">
+        <b>Scratch Words in the Sand:</b><br />
+        <label for="titlefield">Title</label>
+        <input type="text" id="titlefield" data-ng-model="newcomment.title"></input><br />
+        <label for="namefield">Name</label>
+        <input type="text" id="namefield" data-ng-model="newcomment.name"></input><br />
+        <br />
+        <span>Enter your comment</span><br />
+        <textarea data-ng-model="newcomment.text"></textarea><br />
+        <button data-ng-click="postComment()">Post</button>
+    </div>
     <div class="textsection" data-ng-repeat="comment in comments">
         <b>{{comment.title}}</b><br />
         <span>{{comment.author}} - {{comment.date}}</span>
