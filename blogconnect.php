@@ -21,14 +21,39 @@ try{
     die("DISMAL CONNECTION FAILURE: " . $tantrum->getMessage());
 }
 
-/* Get blog data and output it as json */
+/* Get blog post data and output it as json */
 /* If we have an ID, just get that one post. Otherwise, get all posts. */
-$query = "SELECT * FROM blog";
-$id = $_GET['ID'];
-if(ctype_digit($id) && $id > -1){
-    $query = $query . " WHERE id = $id";
-}else{
-    $query = $query . " ORDER BY id DESC";
+function getBlogPostsQuery(){
+    $query = "SELECT * FROM blog";
+    $id = $_GET['ID'];
+    if(ctype_digit($id) && $id > -1){
+        $query = $query . " WHERE id = $id";
+    }else{
+        $query = $query . " ORDER BY id DESC";
+    }
+    return $query;
+}
+
+function getBlogCommentsQuery(){
+    $query = "SELECT * FROM blogcomments";
+    $post_id = $_GET['ID'];
+    if(ctype_digit($post_id) && $post_id > -1){
+        $query = $query . " WHERE post = $post_id ORDER BY id";
+    }else{
+        die("Eyyy, where's my ID? I need a post id, numbnuts!");
+    }
+    return $query;
+}
+
+switch($_GET['querytype']){
+    case 'blogcomments':
+        $query = getBlogCommentsQuery();
+        break;
+    case 'blogposts':
+        //Intentional fallthrough
+    default:
+        $query = getBlogPostsQuery();
+        break;
 }
 
 try{

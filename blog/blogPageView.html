@@ -12,4 +12,10 @@
             <span data-ng-repeat="keyword in post.keywords"> <i>{{keyword}}</i></span>
         </div>
     </div>
+    <h4>Comments:</h4>
+    <div class="textsection" data-ng-repeat="comment in comments">
+        <b>{{comment.title}}</b><br />
+        <span>{{comment.author}} - {{comment.date}}</span>
+        <p>{{comment.text}}</p>
+    </div>
 </div>
