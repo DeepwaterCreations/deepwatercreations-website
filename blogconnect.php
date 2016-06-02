@@ -6,7 +6,7 @@ $pdo = getConnection();
 /* If we have an ID, just get that one post. Otherwise, get all posts. */
 function getBlogPostsQuery(){
     $query = "SELECT * FROM blog";
-    $id = $_GET['ID'];
+    $id = isset($_GET['ID']) ? $_GET['ID'] : -1;
     if(ctype_digit($id) && $id > -1){
         $query = $query . " WHERE id = $id";
     }else{
@@ -26,7 +26,7 @@ function getBlogCommentsQuery(){
     return $query;
 }
 
-switch($_GET['querytype']){
+switch(isset($_GET['querytype']) ? $_GET['querytype'] : ''){
     case 'blogcomments':
         $query = getBlogCommentsQuery();
         break;
