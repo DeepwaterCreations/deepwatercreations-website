@@ -2,9 +2,10 @@ deepwaterControllers.controller('BlogPageCtrl', function($scope, $routeParams, $
     $scope.post = {};
     $scope.comments = [];
     $scope.newcomment = {
+        postid: $routeParams.ID,
         title: "",
         name: "",
-        text: ""
+        comment: ""
     };
     $http.get('blogconnect.php', {params: {ID: $routeParams.ID, querytype: "blogposts"}}).
         //Get the post content
@@ -17,10 +18,12 @@ deepwaterControllers.controller('BlogPageCtrl', function($scope, $routeParams, $
             $scope.comments = data.data; 
         }));
 
+    //Add a new comment to the database
     $scope.postComment = function(){
-        $scope.newcomment.post = $scope.post.id;
-        $scope.newcomment.date = "Who knows?";
-        $scope.newcomment.id = "I'll let MySQL figure this one out.";
         console.log($scope.newcomment);
+        $http.post('insertblogcomment.php', $scope.newcomment).
+            then(function(data){
+                //TODO: Refresh the view so we can see the posted comment?
+            });
     };
 });
