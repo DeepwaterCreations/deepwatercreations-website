@@ -47,7 +47,7 @@ if($params["comment"] != ""){
             $comment;
         //Word wrap because lines longer than 70 characters aren't allowed.
         $mailBody = wordwrap($mailBody, 70, "\r\n");
-        mail($myEmail, $mailSubj, $mailBody, $headers);
+        mail($myEmail, $mailSubj, $mailBody);
     }
 }
 
