@@ -23,7 +23,7 @@ deepwaterControllers.controller('BlogPageCtrl', function($scope, $routeParams, $
         console.log($scope.newcomment);
         $http.post('insertblogcomment.php', $scope.newcomment).
             then(function(data){
-                //TODO: Refresh the view so we can see the posted comment?
+                window.location.reload(true);
             });
     };
 });
