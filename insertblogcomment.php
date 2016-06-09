@@ -27,12 +27,10 @@ if($params["comment"] != ""){
 
     if($success){
         /* Got to tell the blog post that it has a new comment */
-        $query = sprintf("UPDATE  blog  SET  comments  =  comments + 1 WHERE  id=" . $postid);    
-        //TODO: protect the above query from SQL injection
+        $blog_comment_update_query = sprintf("UPDATE  blog  SET  comments  =  comments + 1 WHERE  id = :postid");    
+        $blog_comment_update_prepared_statement = $pdo->prepare($blog_comment_update_query);
         try{
-            $pdo->beginTransaction();
-            $result = $pdo->query($query);
-            $pdo->commit();
+            $success = $blog_comment_update_prepared_statement->execute(array(':postid'=>$postid));
         } catch(Exception $fit){
             $pdo->rollBack();
             die("COULDN'T UPDATE COMMENT COUNT: " . $fit->getMessage());
