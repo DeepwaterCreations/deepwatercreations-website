@@ -27,7 +27,7 @@ if($params["comment"] != ""){
 
     if($success){
         /* Got to tell the blog post that it has a new comment */
-        $blog_comment_update_query = sprintf("UPDATE  blog  SET  comments  =  comments + 1 WHERE  id = :postid");    
+        $blog_comment_update_query = 'UPDATE blog SET comments = comments + 1 WHERE id = :postid';
         $blog_comment_update_prepared_statement = $pdo->prepare($blog_comment_update_query);
         try{
             $success = $blog_comment_update_prepared_statement->execute(array(':postid'=>$postid));
