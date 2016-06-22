@@ -15,6 +15,7 @@ if($params["comment"] != ""){
     $post_comment_prepared_statement = $pdo->prepare($post_comment_query);
 
     try{
+        $pdo->beginTransaction();
         $success = $post_comment_prepared_statement->execute(array(':postid'=>$postid,
                                                         ':title'=>$title,
                                                         ':name'=>($name == "") ? 'Outis' : $name,
@@ -31,6 +32,12 @@ if($params["comment"] != ""){
         $blog_comment_update_prepared_statement = $pdo->prepare($blog_comment_update_query);
         try{
             $success = $blog_comment_update_prepared_statement->execute(array(':postid'=>$postid));
+            if($success){
+                $pdo->commit();
+            }else{
+                throw new Exception("Couldn't update comment count");
+            }
+
         } catch(Exception $fit){
             $pdo->rollBack();
             die("COULDN'T UPDATE COMMENT COUNT: " . $fit->getMessage());
