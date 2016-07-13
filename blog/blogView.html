@@ -6,5 +6,8 @@
         <p>{{post.author}} - {{post.date}}</p>
         <br />
         <div data-ng-bind-html="post.entry"></div>
+        <br />
+        <span><a href="#/blog/{{post.id}}#comments">{{getCommentCountText(post)}}</span>
+
     </div>
 </div>

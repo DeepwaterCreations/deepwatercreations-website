@@ -38,4 +38,19 @@ deepwaterControllers.controller('BlogCtrl', function($scope, $http){
         var oldestpage = Math.floor(blogposts.length / posts_per_page);
         return $scope.current_page >= oldestpage;
     }
+
+    //Return text stating the number of comments for the given post.
+    $scope.getCommentCountText = function(post){
+        if(post.comments < 1){
+            return "No Comments";
+        }
+
+        if(post.comments === 1){
+            return "One Comment";
+        }
+
+        if(post.comments > 1){
+            return post.comments + " Comments";
+        }
+    };
 });
