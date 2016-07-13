@@ -19,24 +19,34 @@ deepwaterControllers.controller('BlogCtrl', function($scope, $http){
         return blogposts.slice(firstpagepost, firstpagepost + posts_per_page);
     };
 
+    //Returns the page number of the oldest page.
+    function oldestPageNumber(){
+        return Math.floor(blogposts.length / posts_per_page);
+    }
+
     //Changes the page
     //Higher page number means older posts.
+    $scope.lastPage = function(){
+        $scope.current_page = 0;
+    }
     $scope.nextPage = function(){
-        $scope.current_page++;   
-    };
-    $scope.prevPage = function(){
         $scope.current_page--;    
         if($scope.current_page < 0)
             $scope.current_page = 0;
     };
+    $scope.prevPage = function(){
+        $scope.current_page++;   
+    };
+    $scope.firstPage = function(){
+        $scope.current_page = oldestPageNumber();
+    }
 
     //Check if we're on the first or last page.
     $scope.isNewestPage = function(){
         return $scope.current_page <= 0;
     }
     $scope.isOldestPage = function(){
-        var oldestpage = Math.floor(blogposts.length / posts_per_page);
-        return $scope.current_page >= oldestpage;
+        return $scope.current_page >= oldestPageNumber();
     }
 
     //Return text stating the number of comments for the given post.
