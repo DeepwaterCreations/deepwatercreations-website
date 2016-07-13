@@ -1,0 +1,29 @@
+#blog_navigation_buttons{
+    display: flex;
+    justify-content: space-between;
+}
+
+#blog_navigation_buttons button{
+    border-style: solid;
+    border-width: 1px;
+    border-color: #007399;
+    background-color: rgba(0,0,0,.75);
+    color: #AAAAAA;
+    margin: 0px 10px;
+    padding: 5px; 
+}
+
+#blog_navigation_buttons button:hover:enabled{
+    color: #FFFFFF;    
+}
+
+#blog_navigation_buttons #older_posts{
+
+}
+
+#blog_navigation_buttons #newer_posts{
+    align: right;
+}
+
+#blog_navigation_buttons .spacer{
+    flex: 1;
