@@ -14,7 +14,15 @@
 }
 
 #blog_navigation_buttons button:hover:enabled{
-    color: #FFFFFF;    
+    color: #BBDDFF; 
+    border-color: #AA7399;
+    text-shadow: 0 0 2px #BBDDFF, 0 0 4px #FFFFFF;
+    transition: all 1.5s;
+}
+#blog_navigation_buttons button:not(hover):enabled{
+    color: #AAAAAA;
+    border-color: #007399;
+    transition: all 1.5s;
 }
 
 #blog_navigation_buttons #older_posts{
