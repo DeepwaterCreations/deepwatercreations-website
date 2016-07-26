@@ -14,14 +14,13 @@
     </div>
     <a name="comments"></a>
     <h4>Comments:</h4>
-    <div class="textsection">
-        <b>Scratch Words in the Sand:</b><br />
+    <div id="comment_input" class="textsection">
+        <b>Scratch Words in the Sand</b><br />
         <label for="titlefield">Title</label>
         <input type="text" id="titlefield" data-ng-model="newcomment.title"></input><br />
         <label for="namefield">Name</label>
         <input type="text" id="namefield" data-ng-model="newcomment.name"></input><br />
-        <br />
-        <span>Enter your comment</span><br />
+        <span>Enter your comment</span>
         <textarea data-ng-model="newcomment.comment"></textarea><br />
         <button data-ng-click="postComment()">Post</button>
     </div>

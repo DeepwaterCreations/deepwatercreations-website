@@ -1,0 +1,25 @@
+#comment_input{
+   display: flex; 
+   flex-direction: column;
+   padding: 2em;
+}
+
+#comment_input input{
+    width: 50%;
+    background-color: black;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #007399;
+    color: #55AAFF;
+}
+
+#comment_input textarea{
+   height: 5em; 
+    background-color: black;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #007399;
+    color: #55AAFF;
+}
+
+
