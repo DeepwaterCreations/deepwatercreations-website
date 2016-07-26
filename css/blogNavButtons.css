@@ -3,28 +3,6 @@
     justify-content: space-between;
 }
 
-.blog_navigation_buttons button{
-    border-style: solid;
-    border-width: 1px;
-    border-color: #007399;
-    background-color: rgba(0,0,0,.75);
-    color: #AAAAAA;
-    margin: 0px 10px;
-    padding: 5px; 
-}
-
-.blog_navigation_buttons button:hover:enabled{
-    color: #BBDDFF; 
-    border-color: #AA7399;
-    text-shadow: 0 0 2px #BBDDFF, 0 0 4px #FFFFFF;
-    transition: all 1.5s;
-}
-.blog_navigation_buttons button:not(hover):enabled{
-    color: #AAAAAA;
-    border-color: #007399;
-    transition: all 1.5s;
-}
-
 .blog_navigation_buttons .older_posts{
 
 }
