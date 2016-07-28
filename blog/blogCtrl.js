@@ -2,11 +2,24 @@ deepwaterControllers.controller('BlogCtrl', function($scope, $http){
     //Get the blog posts from the PHP script that 
     //queries the database.
     var blogposts = [];
+    var keywords = [];
     $http.get('blogconnect.php').success(function(data){
         //Run the data through the post parser to interpret 
         //any hand-rolled markup I might be using.
         data.forEach(function(post){
             blogposts.push(PostParser.parse(post));
+
+            //Put unique keywords into the keyword list.
+            //TODO: Conceivably, there may be scalability problems here down the road.
+            //Can MySQL do this faster? It probably can.
+            var post_keywords = post.keywords.split(",");
+            post_keywords.forEach(function(word){
+                //Strip whitespace from beginning and end.
+                word = word.replace(/^\s+|\s+$/g,'');
+                if(keywords.indexOf(word) === -1){
+                    keywords.push(word);
+                }
+            });
         });
     });
 
