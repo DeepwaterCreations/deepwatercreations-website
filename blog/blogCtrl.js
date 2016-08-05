@@ -3,6 +3,7 @@ deepwaterControllers.controller('BlogCtrl', function($scope, $http){
     //queries the database.
     var blogposts = [];
     var keywords = [];
+    $scope.filter_keywords = "";
     $http.get('blogconnect.php').success(function(data){
         //Run the data through the post parser to interpret 
         //any hand-rolled markup I might be using.
@@ -27,9 +28,35 @@ deepwaterControllers.controller('BlogCtrl', function($scope, $http){
     var posts_per_page = 10;
 
     //Returns the blog posts for the current page
-    $scope.getPagePosts = function(){
-        var firstpagepost = $scope.current_page * posts_per_page;
-        return blogposts.slice(firstpagepost, firstpagepost + posts_per_page);
+    $scope.getPagePosts = function(posts){
+        posts = posts || blogposts;
+        var matchedposts = filterByKeywords(posts);
+        var firstpagepost_idx = $scope.current_page * posts_per_page;
+        return matchedposts.slice(firstpagepost_idx, firstpagepost_idx + posts_per_page);
+    };
+    
+    filterByKeywords = function(posts){
+        if(!$scope.filter_keywords){
+            return posts;
+        }  
+
+        var match_keywords = $scope.filter_keywords.split(',');
+        var matches = [];
+        posts.forEach(function(post){
+            var post_keywords = post.keywords.split(',');
+            post_keywords.forEach(function(keyword){
+                keyword = keyword.trim();
+            });
+            match_keywords.forEach(function(keyword){
+                keyword = keyword.trim();
+                if(post_keywords.indexOf(keyword) > -1) {
+                    matches.push(post);
+                    return;
+                }
+            });
+        });
+        
+        return matches;
     };
 
     //Returns the page number of the oldest page.

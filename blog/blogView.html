@@ -1,4 +1,7 @@
 <div id="blog_view_container" data-ng-controller="BlogCtrl">
+    <div>
+        <input type="text" id="filter_input" data-ng-model="filter_keywords"></input>
+    </div>
     <div data-ng-include="'blog/blogView_navButtons.html'"></div>
     <div class="textsection" data-ng-repeat="post in getPagePosts()">
         <h3><a class="post" href="#/blog/{{post.id}}">{{post.title}}</a></h3>
