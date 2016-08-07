@@ -1,0 +1,8 @@
+/* We want to hide the search panel except for where */
+/* we explicitly want to show it. */
+#blog_view_container .blog_search_panel{
+    display: none;
+}
+#blog_view_container .include_search .blog_search_panel{
+    display: initial;
+}
