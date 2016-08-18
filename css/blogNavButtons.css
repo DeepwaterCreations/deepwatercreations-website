@@ -4,7 +4,6 @@
 }
 
 .blog_navigation_buttons .older_posts{
-
 }
 
 .blog_navigation_buttons .newer_posts{
@@ -13,4 +12,13 @@
 
 .blog_navigation_buttons .spacer{
     flex: 1;
+}
+
+/* We want to hide the search panel button except for where */
+/* we explicitly want to show it. */
+.open_search{
+    display: none;
+}
+.include_search .open_search{
+    display: initial;
 }

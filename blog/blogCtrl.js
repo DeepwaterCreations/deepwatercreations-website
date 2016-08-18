@@ -1,9 +1,11 @@
 deepwaterControllers.controller('BlogCtrl', function($scope, $http){
+    $scope.showSearchPanel = false;
     //Get the blog posts from the PHP script that 
     //queries the database.
     var blogposts = [];
     var keywords = [];
-    $scope.filter_keywords = "";
+    $scope.obj = {}
+    $scope.obj.filter_keywords = "";
     $http.get('blogconnect.php').success(function(data){
         //Run the data through the post parser to interpret 
         //any hand-rolled markup I might be using.
@@ -36,11 +38,11 @@ deepwaterControllers.controller('BlogCtrl', function($scope, $http){
     };
     
     filterByKeywords = function(posts){
-        if(!$scope.filter_keywords){
+        if(!$scope.obj.filter_keywords){
             return posts;
         }  
 
-        var match_keywords = $scope.filter_keywords.split(',');
+        var match_keywords = $scope.obj.filter_keywords.split(',');
         var matches = [];
         posts.forEach(function(post){
             var post_keywords = post.keywords.split(',');
@@ -102,5 +104,10 @@ deepwaterControllers.controller('BlogCtrl', function($scope, $http){
         if(post.comments > 1){
             return post.comments + " Comments";
         }
+    };
+
+    //Show or hide the search/filter panel
+    $scope.toggleSearch = function(){
+        $scope.showSearchPanel = !$scope.showSearchPanel; 
     };
 });
