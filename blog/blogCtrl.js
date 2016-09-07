@@ -37,6 +37,7 @@ deepwaterControllers.controller('BlogCtrl', function($scope, $http){
         return matchedposts.slice(firstpagepost_idx, firstpagepost_idx + posts_per_page);
     };
     
+    //Returns a list of posts that match the current filter keywords
     filterByKeywords = function(posts){
         if(!$scope.obj.filter_keywords){
             return posts;
