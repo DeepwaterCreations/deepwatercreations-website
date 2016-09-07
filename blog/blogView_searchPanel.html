@@ -1,3 +1,5 @@
 <div class="blog_search_panel">
-    <input type="text" id="filter_input" data-ng-model="obj.filter_keywords"></input>
+    <input type="text" id="filter_input" data-ng-model="obj.filter_keywords"
+        data-ng-model-options="{updateOn: 'default blur',
+                                debounce: {'default': 1000, 'blur': 0}}"></input>
 </div>
