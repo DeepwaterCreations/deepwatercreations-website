@@ -11,6 +11,7 @@
         <link rel="stylesheet" type="text/css" href="css/blogNavButtons.css">
         <link rel="stylesheet" type="text/css" href="css/blogPageView.css">
         <link rel="stylesheet" type="text/css" href="css/blogSearchFilter.css">
+        <link rel="stylesheet" type="text/css" href="css/socicons.css">
 
         <!-- EXTERNAL SCRIPTS-->
         <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script> -->
@@ -33,6 +34,19 @@
     </head>
     <body>
         <div class="logo"><img src="DClogo2013blueneon-medrez.png"></div>
+        <div class="top_panel center">
+            <div class="socicons">
+                <button data-ng-click="windows.location='https://github.com/DeepwaterCreations'">GitHub</button>
+                <button data-ng-click="windows.location='http://www.zazzle.com/deepwatercreations*?tc=wobsite'">Zazzle</button>
+                <button data-ng-click="windows.location='https://joindiaspora.com/u/deepwatercreations'">Diaspora</button>
+                <button data-ng-click="windows.location='https://www.youtube.com/channel/UC_kdrAV6aBZQdVMJU4yfQiA'">YouTube</button>
+                <button data-ng-click="windows.location='https://www.patreon.com/DeepwaterCreations'">Patreon</button>
+                <button data-ng-click="windows.location='https://www.linkedin.com/in/dylancraine'">LinkedIn</button>
+                <button data-ng-click="windows.location='https://twitter.com/DpwatrCreations'">Twitter</button>
+            </div>
+        </div>
+        <br/>
+        <div class="divider center">----------THIS IS A PLACEHOLDER ----------</div>
         <div data-ng-view class="center"></div>
     </body>
 </html>
