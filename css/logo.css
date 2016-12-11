@@ -1,0 +1,19 @@
+#logo{
+    width: 100%;
+    height: 450px;
+    background-image: url(DClogo2013blueneon-medrez.png);
+    background-attachment: fixed;
+    background-position: center top;
+    background-repeat: no-repeat;
+    position: absolute;
+    z-index: -2;
+}
+#logo-space{
+    width: 100%;
+    height: 350px;
+}
+#logo-fade{
+    width: 100%;
+    height: 100px;
+    background-image: linear-gradient(rgba(0,0,0,0), black);
+}
