@@ -7,6 +7,10 @@
         margin: 0px 10px;
     }
 
+    .blog_navigation_buttons img{
+        height: 30px;
+    }
+
 .blog_navigation_buttons .older_posts{
 }
 

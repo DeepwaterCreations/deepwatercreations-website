@@ -1,8 +1,16 @@
 <div class="blog_navigation_buttons">
-    <button class="first_page" data-ng-click="firstPage()" data-ng-show="!isOldestPage()">First Page</button>
-    <button class="older_posts" data-ng-click="prevPage()" data-ng-show="!isOldestPage()">Older Posts</button>
+    <button class="first_page" data-ng-click="firstPage()" data-ng-show="!isOldestPage()">
+        <img src="button_first.svg" />
+    </button>
+    <button class="older_posts" data-ng-click="prevPage()" data-ng-show="!isOldestPage()">
+        <img src="button_older.svg" />
+    </button>
     <!-- <button class="open_search" data-ng-click="toggleSearch()">/O</button> -->
     <span class="spacer"></span>
-    <button class="newer_posts" data-ng-click="nextPage()" data-ng-show="!isNewestPage()">Newer Posts</button>
-    <button class="last_page" data-ng-click="lastPage()" data-ng-show="!isNewestPage()">Last Page</button>
+    <button class="newer_posts" data-ng-click="nextPage()" data-ng-show="!isNewestPage()">
+        <img src="button_newer.svg" />
+    </button>
+    <button class="last_page" data-ng-click="lastPage()" data-ng-show="!isNewestPage()">
+        <img src="button_last.svg" />
+    </button>
 </div>
