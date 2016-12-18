@@ -7,10 +7,10 @@
     width: 23%;
     max-width: 30ch;
     position: absolute;
-}
 
-.sidebar h2{
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
 }
 
 .sidebar.left{
@@ -19,3 +19,27 @@
 .sidebar.right{
     right: 5px;
 }
+
+.sidebar .section_title{
+    text-align: center;
+    font-size: 1.6em;
+}
+
+.sidebar .sidebar_link{
+    border-style: solid;
+    border-width: 1px;
+    border-color:#007399;
+    color:#0066CC;   
+
+    padding: 5px;
+    margin: 2px;
+}
+    .sidebar .sidebar_link .title{
+        text-align: center;
+        font-size: 1.2em;
+    }
+
+    .sidebar .sidebar_link .desc{
+        text-align: center;
+        font-size: 0.8em;
+    }
