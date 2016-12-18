@@ -1,11 +1,12 @@
 .sidebar {
-  border-style:solid;
-  border-width:1px;
-  border-color:#007399;
-  background-color:rgba(0,0,0,.75);
-  width: 23%;
-  max-width: 30ch;
-  position: absolute;
+    border-style:solid;
+    border-width:1px;
+    border-color:#007399;
+    background-color:rgba(0,0,0,.75);
+
+    width: 23%;
+    max-width: 30ch;
+    position: absolute;
 }
 
 .sidebar h2{
