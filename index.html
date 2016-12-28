@@ -33,6 +33,7 @@
         <script src="blog/blogCtrl.js"></script>
         <script src="blog/blogPageCtrl.js"></script>
         <script src="sidebars/sidebarLeftCtrl.js"></script>
+        <script src="sidebars/sidebarRightCtrl.js"></script>
 
     </head>
     <body>
@@ -53,6 +54,10 @@
         <div class="sidebar left" 
             data-ng-controller="SidebarLeftCtrl" 
             data-ng-include="'sidebars/sidebarLeftView.html'">
+        </div>
+        <div class="sidebar right"
+             data-ng-controller="SidebarRightCtrl"
+            data-ng-include="'sidebars/sidebarRightView.html'">
         </div>
         <br/>
         <br/>
