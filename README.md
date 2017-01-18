@@ -1,4 +1,4 @@
 # deepwatercreations-website
-The new version of my website. Once it has equivalent features to the old version, I'll replace the old one with this.
-That has not yet happened. If you go look at my website, you won't be looking at what's in this repository, you'll
-be looking at old PHP code from years ago.
+My personal website, live at www.deepwatercreations.com. 
+Contains a blog. Used to contain a portfolio of creative projects, but now most of that's either here on GitHub or being submitted to fiction magazines. Uses Angular.js for the frontend and some PHP scripts + a MySQL database for the backend. Also, the logo and blog page navigation buttons are all my own artwork. 
+
