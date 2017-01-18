@@ -3,15 +3,24 @@ require 'dbconnect.php';
 $pdo = getConnection();
 
 /* Get blog post data and output it as json */
-/* If we have an ID, just get that one post. Otherwise, get all posts. */
+/* If we have an ID, just get that one post.*/
+/* Otherwise, get a number of posts (default all) starting at*/
+/* the offset (default 0).*/
 function getBlogPostsQuery(){
     $query = "SELECT * FROM blog";
     $id = isset($_GET['ID']) ? $_GET['ID'] : -1;
+    $offset = isset($_GET['offset']) ? $_GET['offset'] : 0;
+    $num_posts = isset($_GET['num_posts']) ? $_GET['num_posts'] : 'BLAAAH';
     if(ctype_digit($id) && $id > -1){
         $query = $query . " WHERE id = $id";
-    }else{
-        $query = $query . " ORDER BY id DESC";
+    }else if(ctype_digit($offset) && $offset > -1){
+        $query = $query . " WHERE id >= $offset";
+        if(ctype_digit($num_posts) && $num_posts > -1){
+            $max_post = $offset + $num_posts;
+            $query = $query . " AND id < $max_post";     
+        }
     }
+    $query = $query . " ORDER BY id DESC";
     return $query;
 }
 
