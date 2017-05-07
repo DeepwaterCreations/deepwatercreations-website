@@ -6,6 +6,8 @@ deepwaterControllers.controller('BlogCtrl', function($scope, $http){
     var keywords = [];
     $scope.obj = {}
     $scope.obj.filter_keywords = "";
+    $scope.is_newest_page = false;
+    $scope.is_oldest_page = false;
     $http.get('blogconnect.php').success(function(data){
         //Run the data through the post parser to interpret 
         //any hand-rolled markup I might be using.
@@ -24,6 +26,7 @@ deepwaterControllers.controller('BlogCtrl', function($scope, $http){
                 }
             });
         });
+        $scope.SetNewestOldestPage();
     });
 
     $scope.current_page = 0; 
@@ -71,25 +74,27 @@ deepwaterControllers.controller('BlogCtrl', function($scope, $http){
     //Higher page number means older posts.
     $scope.lastPage = function(){
         $scope.current_page = 0;
+        $scope.SetNewestOldestPage();
     }
     $scope.nextPage = function(){
         $scope.current_page--;    
         if($scope.current_page < 0)
             $scope.current_page = 0;
+        $scope.SetNewestOldestPage();
     };
     $scope.prevPage = function(){
         $scope.current_page++;   
+        $scope.SetNewestOldestPage();
     };
     $scope.firstPage = function(){
         $scope.current_page = oldestPageNumber();
+        $scope.SetNewestOldestPage();
     }
 
     //Check if we're on the first or last page.
-    $scope.isNewestPage = function(){
-        return $scope.current_page <= 0;
-    }
-    $scope.isOldestPage = function(){
-        return $scope.current_page >= oldestPageNumber();
+    $scope.SetNewestOldestPage = function(){
+        $scope.is_newest_page = $scope.current_page <= 0;
+        $scope.is_oldest_page = $scope.current_page >= oldestPageNumber();
     }
 
     //Return text stating the number of comments for the given post.
