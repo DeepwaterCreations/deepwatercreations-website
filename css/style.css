@@ -20,6 +20,10 @@ div.textsection {
   padding:15px;
 }
 
+    div.textsection img{
+    	max-width: 100%;
+    }
+
 div.center{
  width:50%;
  min-width: 25em;
