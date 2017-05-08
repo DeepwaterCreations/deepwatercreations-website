@@ -1,87 +1,70 @@
-deepwaterControllers.controller('BlogCtrl', function($scope, $http){
+deepwaterControllers.controller('BlogCtrl', function($scope, $http, $timeout){
     $scope.showSearchPanel = false;
+
+    var posts_per_page = 10;
+    var total_posts = 0;
+    $scope.current_page = 0;
+    $scope.oldest_page_number = -1; 
+
     //Get the blog posts from the PHP script that 
     //queries the database.
-    var blogposts = [];
+    $scope.blogposts = [];
     var keywords = [];
     $scope.obj = {}
     $scope.obj.filter_keywords = "";
-    $http.get('blogconnect.php').success(function(data){
-        //Run the data through the post parser to interpret 
-        //any hand-rolled markup I might be using.
-        data.forEach(function(post){
-            blogposts.push(PostParser.parse(post));
 
-            //Put unique keywords into the keyword list.
-            //TODO: Conceivably, there may be scalability problems here down the road.
-            //Can MySQL do this faster? It probably can.
-            var post_keywords = post.keywords.split(",");
-            post_keywords.forEach(function(word){
-                //Strip whitespace from beginning and end.
-                word = word.replace(/^\s+|\s+$/g,'');
-                if(keywords.indexOf(word) === -1){
-                    keywords.push(word);
-                }
-            });
-        });
+    $timeout(function(){
+        getPostsFromDB($scope.current_page, posts_per_page);
+        $scope.oldest_page_number = getOldestPageNumberFromDB(); 
     });
 
-    $scope.current_page = 0; 
-    var posts_per_page = 10;
-
-    //Returns the blog posts for the current page
-    $scope.getPagePosts = function(posts){
-        posts = posts || blogposts;
-        var matchedposts = filterByKeywords(posts);
-        var firstpagepost_idx = $scope.current_page * posts_per_page;
-        return matchedposts.slice(firstpagepost_idx, firstpagepost_idx + posts_per_page);
-    };
-    
-    //Returns a list of posts that match the current filter keywords
-    filterByKeywords = function(posts){
-        if(!$scope.obj.filter_keywords){
-            return posts;
-        }  
-
-        var match_keywords = $scope.obj.filter_keywords.split(',');
-        var matches = [];
-        posts.forEach(function(post){
-            var post_keywords = post.keywords.split(',');
-            post_keywords.forEach(function(keyword){
-                keyword = keyword.trim();
-            });
-            match_keywords.forEach(function(keyword){
-                keyword = keyword.trim();
-                if(post_keywords.indexOf(keyword) > -1) {
-                    matches.push(post);
-                    return;
-                }
+    //Gets num_posts posts starting at id == offset from the db,
+    //parses them, and replaces blogposts with the results.
+    var getPostsFromDB = function(page_num, page_size){
+        var blogconnect_params = {
+            page_num: page_num || $scope.current_page,
+            page_size: page_size || posts_per_page
+        };
+        $http.get('blogconnect.php', {params: blogconnect_params}).success(function(data){
+            //Run the data through the post parser to interpret 
+            //any hand-rolled markup I might be using.
+            $scope.blogposts = [];
+            data.forEach(function(post){
+                $scope.blogposts.push(PostParser.parse(post));
             });
         });
-        
-        return matches;
     };
 
-    //Returns the page number of the oldest page.
-    function oldestPageNumber(){
-        return Math.floor(blogposts.length / posts_per_page);
-    }
+    //Returns the page number of the oldest page, based on
+    //the total number of posts in the database.
+    var getOldestPageNumberFromDB = function(){
+        $http.get('blogconnect.php', {params: {querytype: "postcount"}}).success(function(data){
+            var count = data[0][0];
+            $scope.oldest_page_number = Math.floor(count / posts_per_page);
+        }); 
+    };
 
     //Changes the page
     //Higher page number means older posts.
     $scope.lastPage = function(){
         $scope.current_page = 0;
+        getPostsFromDB($scope.current_page, posts_per_page);
     }
     $scope.nextPage = function(){
         $scope.current_page--;    
         if($scope.current_page < 0)
             $scope.current_page = 0;
+        getPostsFromDB($scope.current_page, posts_per_page);
     };
     $scope.prevPage = function(){
         $scope.current_page++;   
+        if($scope.current_page > $scope.oldest_page_number)
+            $scope.current_page = $scope.oldest_page_number;
+        getPostsFromDB($scope.current_page, posts_per_page);
     };
     $scope.firstPage = function(){
-        $scope.current_page = oldestPageNumber();
+        $scope.current_page = $scope.oldest_page_number;
+        getPostsFromDB($scope.current_page, posts_per_page);
     }
 
     //Check if we're on the first or last page.
@@ -89,7 +72,11 @@ deepwaterControllers.controller('BlogCtrl', function($scope, $http){
         return $scope.current_page <= 0;
     }
     $scope.isOldestPage = function(){
-        return $scope.current_page >= oldestPageNumber();
+        return $scope.current_page >= $scope.oldest_page_number;
+        // if($scope.blogposts.length == 0){
+        //     return false;
+        // }
+        // return $scope.blogposts[$scope.blogposts.length-1].id == 0;
     }
 
     //Return text stating the number of comments for the given post.

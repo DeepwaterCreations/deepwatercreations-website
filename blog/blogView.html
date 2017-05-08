@@ -1,7 +1,7 @@
 <div id="blog_view_container" data-ng-controller="BlogCtrl">
     <div data-ng-show="showSearchPanel" data-ng-include="'blog/blogView_searchPanel.html'"></div>
     <div class="include_search" data-ng-include="'blog/blogView_navButtons.html'"></div>
-    <div class="textsection" data-ng-repeat="post in getPagePosts()">
+    <div class="textsection" data-ng-repeat="post in blogposts">
         <h3><a class="post" href="#/blog/{{post.id}}">{{post.title}}</a></h3>
         <p>{{post.author}} - {{post.date}}</p>
         <br />

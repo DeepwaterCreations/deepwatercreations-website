@@ -3,15 +3,39 @@ require 'dbconnect.php';
 $pdo = getConnection();
 
 /* Get blog post data and output it as json */
-/* If we have an ID, just get that one post. Otherwise, get all posts. */
+/* Use the page number and page size to */
+/* return a subset of all the posts, where page 0 includes */
+/* the post with the highest ID, and the page with the post */
+/* that has id=0 will change based on the total number of posts.*/
 function getBlogPostsQuery(){
-    $query = "SELECT * FROM blog";
+    $page_num = isset($_GET['page_num']) ? $_GET['page_num'] : 0;
+    $page_size = isset($_GET['page_size']) ? $_GET['page_size'] : 0;
+    if(ctype_digit($page_size) && ($page_size > 0) && ctype_digit($page_num)){
+        $max_id_offset = $page_num * $page_size;
+        $query = "SELECT * FROM blog";
+        $query = $query . " WHERE id <= ((SELECT MAX(id) FROM blog) - $max_id_offset)";
+        $query = $query . " ORDER BY id DESC";
+        $query = $query . " LIMIT $page_size";
+        return $query;
+    } else {
+        die("Improper Arguments");
+    }
+}
+
+/* Return a single blog post by ID as JSON */
+function getSingleBlogPostQuery(){
     $id = isset($_GET['ID']) ? $_GET['ID'] : -1;
     if(ctype_digit($id) && $id > -1){
-        $query = $query . " WHERE id = $id";
-    }else{
-        $query = $query . " ORDER BY id DESC";
+        $query = "SELECT * FROM blog WHERE id = $id";
+        return $query;
+    } else {
+        die("Improper Arguments");
     }
+
+}
+
+function getPostCountQuery(){
+    $query = "SELECT COUNT(id) FROM blog";
     return $query;
 }
 
@@ -26,9 +50,16 @@ function getBlogCommentsQuery(){
     return $query;
 }
 
+/* TODO: This is dumb. Do it the right way. */
 switch(isset($_GET['querytype']) ? $_GET['querytype'] : ''){
     case 'blogcomments':
         $query = getBlogCommentsQuery();
+        break;
+    case 'singlepost':
+        $query = getSingleBlogPostQuery();
+        break;
+    case 'postcount':
+        $query = getPostCountQuery();
         break;
     case 'blogposts':
         //Intentional fallthrough
@@ -45,7 +76,7 @@ try{
     echo json_encode($result->fetchAll());
 } catch(Exception $fit){
     $pdo->rollBack();
-    echo "Database No Worky: " . $fit->getMessage();
+    echo "Database No Worky: " . $fit->getMessage() . " Query: " . $query;
 }
 
 

@@ -7,7 +7,7 @@ deepwaterControllers.controller('BlogPageCtrl', function($scope, $routeParams, $
         name: "",
         comment: ""
     };
-    $http.get('blogconnect.php', {params: {ID: $routeParams.ID, querytype: "blogposts"}}).
+    $http.get('blogconnect.php', {params: {ID: $routeParams.ID, querytype: "singlepost"}}).
         //Get the post content
         then(function(data){
             $scope.post = data.data[0];          
